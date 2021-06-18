@@ -1,4 +1,4 @@
-# redis_zset_pagination
+# redis-zset-pagination
 little, redis zset based, cursor pagination tool
 ```
 127.0.0.1:6379> zscan zk 0 count 10000

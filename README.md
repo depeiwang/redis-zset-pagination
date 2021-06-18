@@ -1,2 +1,79 @@
 # redis_zset_pagination
-little, redis zset based pagination tool
+little, redis zset based, cursor pagination tool
+```
+127.0.0.1:6379> zscan zk 0 count 10000
+1) "0"
+2)  1) "m1"
+    2) "1"
+    3) "m2"
+    4) "2"
+    5) "m3"
+    6) "3"
+    7) "m4"
+    8) "4"
+    9) "m5"
+   10) "5"
+   11) "m55"
+   12) "5"
+   13) "m555"
+   14) "5"
+   15) "m6"
+   16) "6"
+   17) "m62"
+   18) "6"
+   19) "m63"
+   20) "6"
+   21) "m64"
+   22) "6"
+   23) "m65"
+   24) "6"
+   25) "m66"
+   26) "6"
+   27) "m67"
+   28) "6"
+   29) "m7"
+   30) "7"
+   31) "m71"
+   32) "7"
+127.0.0.1:6379> ZREVRANGEBYSCORE zk +inf -inf WITHSCORES LIMIT 0 2
+1) "m71"
+2) "7"
+3) "m7"
+4) "7"
+127.0.0.1:6379> ZREVRANGEBYSCORE zk 7 -inf WITHSCORES LIMIT 2 2
+1) "m67"
+2) "6"
+3) "m66"
+4) "6"
+127.0.0.1:6379> ZREVRANGEBYSCORE zk 6 -inf WITHSCORES LIMIT 2 2
+1) "m65"
+2) "6"
+3) "m64"
+4) "6"
+127.0.0.1:6379> ZREVRANGEBYSCORE zk 6 -inf WITHSCORES LIMIT 4 2
+1) "m63"
+2) "6"
+3) "m62"
+4) "6"
+127.0.0.1:6379> ZREVRANGEBYSCORE zk 6 -inf WITHSCORES LIMIT 6 2
+1) "m6"
+2) "6"
+3) "m555"
+4) "5"
+127.0.0.1:6379> ZREVRANGEBYSCORE zk 5 -inf WITHSCORES LIMIT 1 2
+1) "m55"
+2) "5"
+3) "m5"
+4) "5"
+127.0.0.1:6379> ZREVRANGEBYSCORE zk 5 -inf WITHSCORES LIMIT 3 2
+1) "m4"
+2) "4"
+3) "m3"
+4) "3"
+127.0.0.1:6379> ZREVRANGEBYSCORE zk 3 -inf WITHSCORES LIMIT 1 2
+1) "m2"
+2) "2"
+3) "m1"
+4) "1"
+127.0.0.1:6379>
+```
